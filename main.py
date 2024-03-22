@@ -45,13 +45,5 @@ root.mainloop()  # Run the Tkinter event loop
 
 
 
-#https://www.youtube.com/watch?v=iRTuCYx6quQ
-#https://www.geeksforgeeks.org/perspective-transformation-python-opencv/
-#https://www.hackster.io/kemfic/curved-lane-detection-34f771
-# https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html
-# https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html
-# https://www.geeksforgeeks.org/python-thresholding-techniques-using-opencv-set-1-simple-thresholding/
-# https://www.youtube.com/watch?v=CvJN_jSVm30
-# https://www.youtube.com/watch?v=eLTLtUVuuy4
 
 
