@@ -7,3 +7,4 @@ https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html
 https://www.geeksforgeeks.org/python-thresholding-techniques-using-opencv-set-1-simple-thresholding/
 https://www.youtube.com/watch?v=CvJN_jSVm30
 https://www.youtube.com/watch?v=eLTLtUVuuy4
+https://www.labellerr.com/blog/real-time-lane-detection-for-self-driving-cars-using-opencv/
