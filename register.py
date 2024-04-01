@@ -98,4 +98,3 @@ def save_register():
          )  
          assert register_window is not None
          register_window.destroy()
-
