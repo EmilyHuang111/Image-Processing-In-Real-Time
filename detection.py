@@ -20,18 +20,20 @@ root.title("User Login")
 eastern = pytz.timezone('US/Eastern')
 
 #Set up global variables for video streaming control
+#https://www.instructables.com/Starting-and-Stopping-Python-Threads-With-Events-i/ line 6
 stop_video_raw = threading.Event()
 stop_video_processed = threading.Event()
 
 # Initialize webcam with a video path
 video_file_path = "./video/IMG_0405.mp4"
 
+#https://docs.opencv.org/4.x/dd/d43/tutorial_py_video_display.html line 3
 webcam = cv.VideoCapture(video_file_path)
 
 webcam_lock = threading.Lock()
 
 # Update the label for log file
-
+#https://pillow.readthedocs.io/en/stable/reference/ImageTk.html line 2
 def update_label(image, label):
     # Create a PhotoImage object from the given image
     photo = ImageTk.PhotoImage(image=image)
@@ -62,6 +64,9 @@ curvature_values = []
 n_values_for_average = 10
 
 # Function to undistort images
+#https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html lines 13-20
+#https://www.mathworks.com/help/vision/ug/camera-calibration.html line 8
+#https://people.cs.rutgers.edu/~elgammal/classes/cs534/lectures/CameraCalibration-book-chapter.pdf All examples
 def undistort_img():
     
     # Generate object points for chessboard corners
@@ -88,6 +93,7 @@ def undistort_img():
         gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
         
         # Find chessboard corners
+        #https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html line 5
         ret, corners = cv.findChessboardCorners(gray, (9, 6), None)
 
         # If corners found, add them to the lists
@@ -100,6 +106,7 @@ def undistort_img():
         raise Exception("No valid images found in 'camera_cal/*.jpg'.")
 
     # Calibrate camera using found points
+    #https://learnopencv.com/camera-calibration-using-opencv/ line 2
     ret, mtx, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, img_size, None, None)
 
     # Undistort an example image
@@ -125,6 +132,10 @@ def undistort(img, cal_dir='camera_cal/cal_pickle.p'):
     return dst
 
 
+#https://medium.com/srm-mic/finding-the-edge-canny-and-sobel-detectors-part-1-65a59b7ef62a line 3
+#https://www.shivangapatel.com/project/lane-detection/ lines 5-20
+#https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html line 9
+#https://docs.opencv.org/3.4/d2/d2c/tutorial_sobel_derivatives.html lines 15-30
 def pipeline(img, s_thresh=(22, 255), sx_thresh=(15, 255)):
     # Undistort the input image
     img = undistort(img)
@@ -172,14 +183,20 @@ def perspective_warp(img,
     dst = dst * np.float32(dst_size)
     
     # Compute the perspective transformation matrix
+    #https://theailearner.com/tag/cv2-getperspectivetransform/ line 1
     M = cv.getPerspectiveTransform(src, dst)
     
+    #https://www.geeksforgeeks.org/perspective-transformation-python-opencv/ line 16
     # Apply perspective transform to the image
     warped = cv.warpPerspective(img, M, dst_size)
     
     return warped
 
-
+#https://towardsdatascience.com/inverse-projection-transformation-c866ccedef1c example 1
+#https://homepages.inf.ed.ac.uk/rbf/BOOKS/BANDB/LIB/bandbA1_2.pdf all examples
+#https://www.mathworks.com/help/driving/ref/birdseyeview.html line 7
+#http://www.vernon.eu/ACV/ACV_24.pdf lines 4-10
+#https://nilesh0109.medium.com/camera-image-perspective-transformation-to-different-plane-using-opencv-5e389dd56527 line 17
 def inv_perspective_warp(img, 
                          dst_size=(1280,720),
                          src=np.float32([(0,0), (1, 0), (0,1), (1,1)]),
@@ -200,6 +217,16 @@ def inv_perspective_warp(img,
     return warped
 
 # Function to calculate histogram of an image
+#https://www.w3resource.com/numpy/manipulation/dstack.php line 3
+#https://www.sciencedirect.com/science/article/abs/pii/S0045790620305085#:~:text=The%20first%20step%20in%20accurately,the%20other%20for%20the%20right. 
+#https://medium.com/@vaibhavraheja32/lane-detection-using-hough-transform-and-histogram-4df44476acb7 
+#https://github.com/canozcivelek/lane-detection-with-steer-and-departure/blob/master/laneDetection.py 
+#https://ieeexplore.ieee.org/document/881084 
+#https://www.researchgate.net/publication/339754039_Lane_Detection_Based_on_Histogram_of_Oriented_Vanishing_Points
+#https://www.analyticsvidhya.com/blog/2023/12/all-you-need-to-know-about-numpys-argmax-function/#:~:text=The%20argmax()%20function%20returns,need%20the%20maximum%20value%20itself. line 8
+#https://sites.tufts.edu/eeseniordesignhandbook/files/2021/05/Jiang_ObjectDetection.pdf
+# https://www.mdpi.com/1424-8220/23/12/575
+#https://numpy.org/doc/stable/reference/generated/numpy.empty.html line 6
 def get_hist(img):
     # Sum pixel values along vertical axis
     hist = np.sum(img[img.shape[0]//2:,:], axis=0)
@@ -240,7 +267,19 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
     right_lane_inds = []
 
 
-   
+    #https://ieeexplore.ieee.org/document/8243405
+    #https://minyoung.info/lane_detection.html example 5
+    #https://numpy.org/doc/stable/reference/generated/numpy.nonzero.html line 7
+    #https://www.youtube.com/watch?v=iRTuCYx6quQ lines 20-45
+    #https://www.geeksforgeeks.org/perspective-transformation-python-opencv/ line 5
+    #https://www.hackster.io/kemfic/curved-lane-detection-34f771 line 9
+    #https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html line 9
+    #https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html line 14
+    #https://www.geeksforgeeks.org/python-thresholding-techniques-using-opencv-set-1-simple-thresholding/ line 4
+    #https://www.youtube.com/watch?v=CvJN_jSVm30 line 15
+    #https://www.youtube.com/watch?v=eLTLtUVuuy4 line 22
+    #https://www.labellerr.com/blog/real-time-lane-detection-for-self-driving-cars-using-opencv/ lines 30-40
+
     # Iterate through each window for lane detection
     for window in range(nwindows):
        
@@ -285,8 +324,9 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
          rightx_current = int(np.mean(nonzerox[good_right_inds]))
 
         
-    
-        # Concatenate the lists of indices to obtain a single array of indices for left and right lanes
+    #https://www.geeksforgeeks.org/numpy-concatenate-function-python/ line 4
+    #https://www.scaler.com/topics/numpy-polyfit/ line 1
+    # Concatenate the lists of indices to obtain a single array of indices for left and right lanes
     left_lane_inds = np.concatenate(left_lane_inds)
     right_lane_inds = np.concatenate(right_lane_inds)
 
@@ -386,6 +426,14 @@ def get_curve(img, leftx, rightx, ploty):
     return (left_curverad, right_curverad, center)
 
 
+#https://www.geeksforgeeks.org/numpy-zeros_like-python/ line 10
+#https://numpy.org/doc/stable/reference/generated/numpy.transpose.html line 5
+#https://www.geeksforgeeks.org/python-numpy-numpy-transpose/ line 4
+#https://www.geeksforgeeks.org/python-opencv-cv2-line-method/ lines 8-10
+#https://www.w3schools.com/python/numpy/numpy_creating_arrays.asp line 2
+#https://www.geeksforgeeks.org/numpy-vstack-in-python/ line 10
+
+
 def draw_lanes(img, left_fit, right_fit, ploty):
     # Create an empty color image with the same dimensions as the input image
     color_img = np.zeros_like(img)
@@ -421,56 +469,8 @@ def draw_lanes(img, left_fit, right_fit, ploty):
     # Return the resulting image
     return result
 
-def calculate_angle(curvature):
-    # Define minimum and maximum curvature values
-    curvature_min = 200
-    curvature_max = 2000
-
-    # Check if the absolute value of curvature is within the specified range
-    if abs(curvature) <= curvature_min:
-        angle = 45  # Set angle to 45 degrees
-    elif abs(curvature) >= curvature_max:
-        angle = 0  # Set angle to 0 degrees
-    else:
-        # Calculate angle based on the curvature within the specified range
-        angle = (1 - (abs(curvature) - curvature_min) / (curvature_max - curvature_min)) * 45
-    
-    # Adjust the angle based on the sign of curvature
-    angle *= np.sign(curvature)
-    
-    return angle
-
-
-def draw_compass(img, curvature, position=None):
-    # Set default position for the compass
-    if position is None:
-        position = (img.shape[1] // 2, 50)
-
-    # Define parameters for drawing the compass
-    compass_radius = 100
-    line_thickness = 4
-    compass_color = (255, 255, 255)  # White color for compass
-    arm_color = (0, 0, 255)  # Red color for compass arm
-
-    # Calculate the angle using the curvature value
-    angle = calculate_angle(curvature)
-    
-    # Calculate the end point of the compass arm
-    end_x = int(position[0] + compass_radius * np.sin(np.radians(angle)))
-    end_y = int(position[1] - compass_radius * np.cos(np.radians(angle)))
-
-    # Draw the ellipse representing the compass
-    cv.ellipse(img, position, (compass_radius, compass_radius), 180, 0, 180, compass_color, thickness=line_thickness)
-    
-    # Draw the horizontal line of the compass
-    cv.line(img, (position[0] - compass_radius, position[1]), (position[0] + compass_radius, position[1]), compass_color, line_thickness)
-  
-    # Draw the arm of the compass indicating the direction
-    cv.line(img, position, (end_x, end_y), arm_color, line_thickness)
-
-    # Return the image with the compass drawn on it
-    return img
-
+# https://www.geeksforgeeks.org/numpy-mean-in-python/ line 6
+#https://numpy.org/doc/stable/reference/generated/numpy.mean.html line 7
 def vid_pipeline(img):
     global running_avg
     global index
@@ -506,6 +506,7 @@ def vid_pipeline(img):
 
     return img
 
+#https://pythonprogramming.net/loading-video-python-opencv-tutorial/ line 2
 def safe_webcam_read(cap, max_attempts=5):
     attempts = 0
     # Try reading from the webcam for a maximum number of attempts
@@ -521,6 +522,7 @@ def safe_webcam_read(cap, max_attempts=5):
     # Return False and None if reading fails after max_attempts
     return False, None  
 
+#https://www.geeksforgeeks.org/python-tkinter-label/ line 4
 def load_video_raw(currentState, userName, frame, stop_event):
     global webcam, webcam_lock
     currentState.config(text="Current State: Camera loaded")
@@ -557,6 +559,10 @@ def load_video_raw(currentState, userName, frame, stop_event):
             with webcam_lock:
                 webcam.set(cv.CAP_PROP_POS_FRAMES, 0)
 
+#https://www.tutorialspoint.com/resizing-images-with-imagetk-photoimage-with-tkinter line 11
+#https://www.pythoninformer.com/python-libraries/numpy/numpy-and-images/ line 3
+#https://note.nkmk.me/en/python-opencv-bgr-rgb-cvtcolor/ line 5-9
+#https://www.geeksforgeeks.org/check-if-the-camera-is-opened-or-not-using-opencv-python/ line 8
 def load_video_processed(currentState, userName, frame, stop_event):
     global webcam, webcam_lock
     currentState.config(text="Current State: Overlay Loaded")
