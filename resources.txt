@@ -1,9 +1,61 @@
-https://www.youtube.com/watch?v=iRTuCYx6quQ (lines 20-45)
-https://www.geeksforgeeks.org/perspective-transformation-python-opencv/ (lines 163-200)
-https://www.hackster.io/kemfic/curved-lane-detection-34f771 (lines 347-422)
-https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html (lines 65-125)
-https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html (lines 150-160)
-https://www.geeksforgeeks.org/python-thresholding-techniques-using-opencv-set-1-simple-thresholding/ (lines 150-160)
-https://www.youtube.com/watch?v=CvJN_jSVm30 (lines 40-70)
-https://www.youtube.com/watch?v=eLTLtUVuuy4 (lines 510-520)
-https://www.labellerr.com/blog/real-time-lane-detection-for-self-driving-cars-using-opencv/ (lines 400-450)
+https://www.instructables.com/Starting-and-Stopping-Python-Threads-With-Events-i/ line 6
+https://docs.opencv.org/4.x/dd/d43/tutorial_py_video_display.html line 3
+https://pillow.readthedocs.io/en/stable/reference/ImageTk.html line 2
+https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html lines 13-20
+https://www.mathworks.com/help/vision/ug/camera-calibration.html line 8
+https://people.cs.rutgers.edu/~elgammal/classes/cs534/lectures/CameraCalibration-book-chapter.pdf All examples
+https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html line 5
+https://learnopencv.com/camera-calibration-using-opencv/ line 2
+https://medium.com/srm-mic/finding-the-edge-canny-and-sobel-detectors-part-1-65a59b7ef62a line 3
+https://www.shivangapatel.com/project/lane-detection/ lines 5-20
+https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html line 9
+https://docs.opencv.org/3.4/d2/d2c/tutorial_sobel_derivatives.html lines 15-30
+https://theailearner.com/tag/cv2-getperspectivetransform/ line 1
+https://www.geeksforgeeks.org/perspective-transformation-python-opencv/ line 16
+https://towardsdatascience.com/inverse-projection-transformation-c866ccedef1c example 1
+https://homepages.inf.ed.ac.uk/rbf/BOOKS/BANDB/LIB/bandbA1_2.pdf all examples
+https://www.mathworks.com/help/driving/ref/birdseyeview.html line 7
+http://www.vernon.eu/ACV/ACV_24.pdf lines 4-10
+https://nilesh0109.medium.com/camera-image-perspective-transformation-to-different-plane-using-opencv-5e389dd56527 line 17
+https://www.w3resource.com/numpy/manipulation/dstack.php line 3
+https://www.sciencedirect.com/science/article/abs/pii/S0045790620305085#:~:text=The%20first%20step%20in%20accurately,the%20other%20for%20the%20right. 
+https://medium.com/@vaibhavraheja32/lane-detection-using-hough-transform-and-histogram-4df44476acb7 
+https://github.com/canozcivelek/lane-detection-with-steer-and-departure/blob/master/laneDetection.py 
+https://ieeexplore.ieee.org/document/881084 
+https://www.researchgate.net/publication/339754039_Lane_Detection_Based_on_Histogram_of_Oriented_Vanishing_Points
+https://www.analyticsvidhya.com/blog/2023/12/all-you-need-to-know-about-numpys-argmax-function/#:~:text=The%20argmax()%20function%20returns,need%20the%20maximum%20value%20itself. line 8
+https://sites.tufts.edu/eeseniordesignhandbook/files/2021/05/Jiang_ObjectDetection.pdf
+https://www.mdpi.com/1424-8220/23/12/575
+https://numpy.org/doc/stable/reference/generated/numpy.empty.html line 6
+https://ieeexplore.ieee.org/document/8243405
+https://minyoung.info/lane_detection.html example 5
+https://numpy.org/doc/stable/reference/generated/numpy.nonzero.html line 7
+https://www.youtube.com/watch?v=iRTuCYx6quQ lines 20-45
+https://www.geeksforgeeks.org/perspective-transformation-python-opencv/ line 5
+https://www.hackster.io/kemfic/curved-lane-detection-34f771 line 9
+https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html line 9
+https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html line 14
+https://www.geeksforgeeks.org/python-thresholding-techniques-using-opencv-set-1-simple-thresholding/ line 4
+https://www.youtube.com/watch?v=CvJN_jSVm30 line 15
+https://www.youtube.com/watch?v=eLTLtUVuuy4 line 22
+https://www.labellerr.com/blog/real-time-lane-detection-for-self-driving-cars-using-opencv/ lines 30-40
+https://www.geeksforgeeks.org/numpy-concatenate-function-python/ line 4
+https://www.scaler.com/topics/numpy-polyfit/ line 1
+https://www.geeksforgeeks.org/numpy-zeros_like-python/ line 10
+https://numpy.org/doc/stable/reference/generated/numpy.transpose.html line 5
+https://www.geeksforgeeks.org/python-numpy-numpy-transpose/ line 4
+https://www.geeksforgeeks.org/python-opencv-cv2-line-method/ lines 8-10
+https://www.w3schools.com/python/numpy/numpy_creating_arrays.asp line 2
+https://www.geeksforgeeks.org/numpy-vstack-in-python/ line 10
+https://www.geeksforgeeks.org/numpy-mean-in-python/ line 6
+https://numpy.org/doc/stable/reference/generated/numpy.mean.html line 7
+https://pythonprogramming.net/loading-video-python-opencv-tutorial/ line 2
+https://www.geeksforgeeks.org/python-tkinter-label/ line 4
+https://www.tutorialspoint.com/resizing-images-with-imagetk-photoimage-with-tkinter line 11
+https://www.pythoninformer.com/python-libraries/numpy/numpy-and-images/ line 3
+https://note.nkmk.me/en/python-opencv-bgr-rgb-cvtcolor/ line 5-9
+https://www.geeksforgeeks.org/check-if-the-camera-is-opened-or-not-using-opencv-python/ line 8
+https://medium.com/@mithi/advanced-lane-finding-using-computer-vision-techniques-7f3230b6c6f2 line 32
+https://github.com/abhijitmahalle/lane-detection/tree/master 
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10302685/ example 1
+https://medium.com/lifeandtech/lane-detection-with-turn-prediction-1773c4819541 lines 10-15
