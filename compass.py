@@ -1,7 +1,6 @@
 import cv2 as cv
 import numpy as np
 
-
 #https://medium.com/@mithi/advanced-lane-finding-using-computer-vision-techniques-7f3230b6c6f2 line 32
 #https://github.com/abhijitmahalle/lane-detection/tree/master 
 #https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10302685/ example 1
