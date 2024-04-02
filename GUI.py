@@ -15,7 +15,7 @@ def move_forward(currentState, userName):
   currentState.config(text="Current State: Forward")
   log_activity(f"{userName} clicked Forward button.")
   try:
-    url_fwd = requests.get("http://192.168.1.28:4444/forward", timeout=10)
+    url_fwd = requests.get("http://192.168.1.28:4444/forward", timeout=1)
   except requests.exceptions.RequestException:
     currentState.config(text="Current State: No Connection")
   else:
@@ -26,7 +26,7 @@ def move_backward(currentState, userName):
   currentState.config(text="Current State: Backward")
   log_activity(f"{userName} clicked Backward button.")
   try:
-    url_bwd = requests.get("http://192.168.1.28:4444/backward", timeout=10)
+    url_bwd = requests.get("http://192.168.1.28:4444/backward", timeout=1)
   except requests.exceptions.RequestException:
     currentState.config(text="Current State: No Connection")
   else:
@@ -37,7 +37,7 @@ def move_left(currentState, userName):
   currentState.config(text="Current State: Left")
   log_activity(f"{userName} clicked Left Move button.")
   try:
-    url_left = requests.get("http://192.168.1.28:4444/left", timeout=10)
+    url_left = requests.get("http://192.168.1.28:4444/left", timeout=1)
   except requests.exceptions.RequestException:
     currentState.config(text="Current State: No Connection")
   else:
@@ -48,7 +48,7 @@ def move_right(currentState, userName):
   currentState.config(text="Current State: Right")
   log_activity(f"{userName} clicked Right Move button.")
   try:
-    url_right = requests.get("http://192.168.1.28:4444/right", timeout=10)
+    url_right = requests.get("http://192.168.1.28:4444/right", timeout=1)
   except requests.exceptions.RequestException:
     currentState.config(text="Current State: No Connection")
   else:
@@ -73,7 +73,7 @@ def move_stop(currentState, userName):
   #webcam.release()
   #cv.destroyAllWindows()
   try:
-    url_stop = requests.get("http://192.168.1.28:4444/stop", timeout=10)
+    url_stop = requests.get("http://192.168.1.28:4444/stop", timeout=1)
   except requests.exceptions.RequestException:
     currentState.config(text="Current State: No Connection")
   else:
