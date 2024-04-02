@@ -19,8 +19,8 @@ root.title("User Login")
 # Set up logging with US/Eastern timezone
 eastern = pytz.timezone('US/Eastern')
 
-#Set up global variables for video streaming control
 #https://www.instructables.com/Starting-and-Stopping-Python-Threads-With-Events-i/ line 6
+#Set up global variables for video streaming control
 stop_video_raw = threading.Event()
 stop_video_processed = threading.Event()
 
@@ -32,8 +32,8 @@ webcam = cv.VideoCapture(video_file_path)
 
 webcam_lock = threading.Lock()
 
-# Update the label for log file
 #https://pillow.readthedocs.io/en/stable/reference/ImageTk.html line 2
+# Update the label for log file
 def update_label(image, label):
     # Create a PhotoImage object from the given image
     photo = ImageTk.PhotoImage(image=image)
@@ -63,10 +63,10 @@ curvature_values = []
 # Number of values to use for curvature averaging
 n_values_for_average = 10
 
-# Function to undistort images
 #https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html lines 13-20
 #https://www.mathworks.com/help/vision/ug/camera-calibration.html line 8
 #https://people.cs.rutgers.edu/~elgammal/classes/cs534/lectures/CameraCalibration-book-chapter.pdf All examples
+# Function to undistort images
 def undistort_img():
     
     # Generate object points for chessboard corners
@@ -92,8 +92,8 @@ def undistort_img():
         # Convert image to grayscale
         gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
         
-        # Find chessboard corners
         #https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html line 5
+        # Find chessboard corners
         ret, corners = cv.findChessboardCorners(gray, (9, 6), None)
 
         # If corners found, add them to the lists
@@ -105,8 +105,8 @@ def undistort_img():
     if img_size is None:
         raise Exception("No valid images found in 'camera_cal/*.jpg'.")
 
-    # Calibrate camera using found points
     #https://learnopencv.com/camera-calibration-using-opencv/ line 2
+    # Calibrate camera using found points
     ret, mtx, dist, rvecs, tvecs = cv.calibrateCamera(objpoints, imgpoints, img_size, None, None)
 
     # Undistort an example image
@@ -170,7 +170,6 @@ def pipeline(img, s_thresh=(22, 255), sx_thresh=(15, 255)):
     combined_binary[(s_binary == 1) | (sxbinary == 1)] = 1
     return combined_binary
 
-
 def perspective_warp(img, 
                      dst_size=(1280,720),
                      src=np.float32([(0.43,0.65),(0.58,0.65),(0.1,1),(1,1)]),
@@ -182,8 +181,8 @@ def perspective_warp(img,
     src = src * img_size
     dst = dst * np.float32(dst_size)
     
-    # Compute the perspective transformation matrix
     #https://theailearner.com/tag/cv2-getperspectivetransform/ line 1
+    # Compute the perspective transformation matrix
     M = cv.getPerspectiveTransform(src, dst)
     
     #https://www.geeksforgeeks.org/perspective-transformation-python-opencv/ line 16
@@ -216,7 +215,7 @@ def inv_perspective_warp(img,
 
     return warped
 
-# Function to calculate histogram of an image
+
 #https://www.w3resource.com/numpy/manipulation/dstack.php line 3
 #https://www.sciencedirect.com/science/article/abs/pii/S0045790620305085#:~:text=The%20first%20step%20in%20accurately,the%20other%20for%20the%20right. 
 #https://medium.com/@vaibhavraheja32/lane-detection-using-hough-transform-and-histogram-4df44476acb7 
@@ -225,8 +224,9 @@ def inv_perspective_warp(img,
 #https://www.researchgate.net/publication/339754039_Lane_Detection_Based_on_Histogram_of_Oriented_Vanishing_Points
 #https://www.analyticsvidhya.com/blog/2023/12/all-you-need-to-know-about-numpys-argmax-function/#:~:text=The%20argmax()%20function%20returns,need%20the%20maximum%20value%20itself. line 8
 #https://sites.tufts.edu/eeseniordesignhandbook/files/2021/05/Jiang_ObjectDetection.pdf
-# https://www.mdpi.com/1424-8220/23/12/575
+#https://www.mdpi.com/1424-8220/23/12/575
 #https://numpy.org/doc/stable/reference/generated/numpy.empty.html line 6
+# Function to calculate histogram of an image
 def get_hist(img):
     # Sum pixel values along vertical axis
     hist = np.sum(img[img.shape[0]//2:,:], axis=0)
@@ -279,7 +279,6 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
     #https://www.youtube.com/watch?v=CvJN_jSVm30 line 15
     #https://www.youtube.com/watch?v=eLTLtUVuuy4 line 22
     #https://www.labellerr.com/blog/real-time-lane-detection-for-self-driving-cars-using-opencv/ lines 30-40
-
     # Iterate through each window for lane detection
     for window in range(nwindows):
        
@@ -469,7 +468,7 @@ def draw_lanes(img, left_fit, right_fit, ploty):
     # Return the resulting image
     return result
 
-# https://www.geeksforgeeks.org/numpy-mean-in-python/ line 6
+#https://www.geeksforgeeks.org/numpy-mean-in-python/ line 6
 #https://numpy.org/doc/stable/reference/generated/numpy.mean.html line 7
 def vid_pipeline(img):
     global running_avg
